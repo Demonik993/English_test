@@ -12,11 +12,13 @@
         <div id="question-form">
             <div id="progress-bar"></div>
             <form action="">
-                <h2 id="question">Please enter you data</h2>
-                <p><label for="user-name">Name:</label><input type="text" id="user-name"></p>
-                <p><label for="user-surname">Surname:</label><input type="text" id="user-surname"></p>
-                <p><label for="user-email">E-mail:</label><input type="email" id="user-email"></p>
-                
+                <fieldset>
+                    <h2 id="question">Please enter you data</h2>
+                    <p><label for="first-name">Name:</label><input id="first-name" placeholder="John" type="text" required></p>
+                    <p><label for="last-name">Surname:</label><input id="last-name" placeholder="Smith" type="text" required></p>
+                    <p><label for="email">e-mail:</label><input id="email" type="email" placeholder="john.smith@gmail.com" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" ></p>
+                    <legend>User data</legend>
+                </fieldset>
                 <button type="submit">Next</button>
             </form>
         </div>
