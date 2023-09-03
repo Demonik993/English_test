@@ -7,7 +7,6 @@ let questionNumber;
 
 //add form with question
 function nextQuestion(questionNumber, questions){
-
     console.log(questions[questionNumber]); // to delete
     const question = questionTemplate.content.cloneNode(true).children[0];
     const legend = question.querySelector('legend');
@@ -16,8 +15,9 @@ function nextQuestion(questionNumber, questions){
     const ansB = question.querySelector('[for="ansB"]');
     const ansC = question.querySelector('[for="ansC"]');
     const ansD = question.querySelector('[for="ansD"]');
-    const button = question.querySelector('[type="submit"')
-    const buttonText = questionNumber<Object.keys(questions).length? "Next question" : "I'am done!"
+    const clear = question.querySelector('#clear');
+    const button = question.querySelector('[type="submit"');
+    const buttonText = questionNumber</*Object.keys(questions).length ?*/10? "Next question" : "I'am done!"
     button.textContent = buttonText;
     legend.textContent = `Question ${questionNumber}`;
     questionVal.textContent = questions[questionNumber][0];
@@ -26,12 +26,36 @@ function nextQuestion(questionNumber, questions){
     ansC.textContent = questions[questionNumber][3];
     ansD.textContent = questions[questionNumber][4];
     questionForm.appendChild(question);
-    document.querySelector('#question').onsubmit = async (e) =>{
+    const answers = document.querySelectorAll('input');
+      //add possibility to unchecked the input;
+    clear.addEventListener('click', (e)=>{
         e.preventDefault();
+        answers.forEach(ans=>{
+            if(ans.checked) ans.checked = false;
+        })
+    });
+    clear.addEventListener('keyevent', (e)=>{
+        e.preventDefault();
+        if(e.target === "enter")
+        answers.forEach(ans=>{
+            if(ans.checked) ans.checked = false;
+        })
+    }); 
+    //adding answer
+    question.onsubmit = async (e) =>{
+        e.preventDefault();
+        if(questionNumber<10){
+        let answer = "no answer";
+        console.log(answers);
+        answers.forEach(ans =>{answer = ans.checked ? ans.value : answer = answer});
+        userAnswers[questionNumber] = answer;
+        console.log(userAnswers);
         question.remove();
-        questionNumber++
-        loadQuestion(questionNumber);
+        questionNumber++;
+        loadQuestion(questionNumber);}
+        else {console.log("hello world")}
     };
+
 
 
 };

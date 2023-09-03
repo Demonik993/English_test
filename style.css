@@ -124,8 +124,8 @@
   background-color: green;
   border-color: green;
 } 
-#question #next-question-submit{
-  left: 210px;
+#question #next-question-submit, #question #clear{
+    position: initial;
 }
 
    
