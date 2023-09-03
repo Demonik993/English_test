@@ -7,8 +7,9 @@ let questionNumber;
 
 //add form with question
 function nextQuestion(questionNumber, questions){
+
     console.log(questions[questionNumber]); // to delete
-    const question = questionTemplate.content.cloneNode(true).children[0]
+    const question = questionTemplate.content.cloneNode(true).children[0];
     const legend = question.querySelector('legend');
     const questionVal = question.querySelector('[questionText]');
     const ansA = question.querySelector('[for="ansA"]');
@@ -24,7 +25,13 @@ function nextQuestion(questionNumber, questions){
     ansB.textContent = questions[questionNumber][2];
     ansC.textContent = questions[questionNumber][3];
     ansD.textContent = questions[questionNumber][4];
-    questionForm.appendChild(question)
+    questionForm.appendChild(question);
+    document.querySelector('#question').onsubmit = async (e) =>{
+        e.preventDefault();
+        question.remove();
+        questionNumber++
+        loadQuestion(questionNumber);
+    };
 
 
 };
