@@ -15,6 +15,9 @@ function nextQuestion(questionNumber, questions){
     const ansB = question.querySelector('[for="ansB"]');
     const ansC = question.querySelector('[for="ansC"]');
     const ansD = question.querySelector('[for="ansD"]');
+    const button = question.querySelector('[type="submit"')
+    const buttonText = questionNumber<Object.keys(questions).length? "Next question" : "I'am done!"
+    button.textContent = buttonText;
     legend.textContent = `Question ${questionNumber}`;
     questionVal.textContent = questions[questionNumber][0];
     ansA.textContent = questions[questionNumber][1];
