@@ -4,18 +4,73 @@ const userAnswers = {};
 const questionTemplate = document.querySelector('[question-form-template]');
 
 let questionNumber;
-
-function calculateAnswers(answers){
+let testName;
+//calculate and send answers
+function calculateAnswers(answers, questions){
     questionForm.innerHTML = "";
-    const title = "Congratulations you have finished your test!"
     let noAnswers=0;
     let correctAnswers=0;
     let wrongAnswers=0;
-    console.log(userAnswers)
+    const checkedAnswers = {
+        testName: testName,
+        name: userAnswers.student.Name,
+        surname: userAnswers.student.Surname,
+        email: userAnswers.student.email,
+        answers: []
+    };
+    console.log(userAnswers);
+    for(let i=1; i<=5; i++){
+        if(answers[i][0]===userAnswers[i]){
+            correctAnswers++;
+            let answer;
+            switch(userAnswers[i]){
+                case "A": answer = questions[i][1]; 
+                break;
+                case "B": answer = questions[i][2]; 
+                break;
+                case "C": answer = questions[i][3]; 
+                break;
+                case "D": answer = questions[i][4];
+            };          
+            checkedAnswers.answers.push(`On question ${i}: ${questions[i][0]} student gave correct answer:${userAnswers[i]}-${answer}.`);
+        }else if(userAnswers[i]!=="no answer" && answers[i][0]!==userAnswers[i]){
+            wrongAnswers++;
+            let correctAnswer;
+            switch(answers[i][0]){
+                case "A": correctAnswer = questions[i][1]; 
+                break;
+                case "B": correctAnswer = questions[i][2]; 
+                break;
+                case "C": correctAnswer = questions[i][3]; 
+                break;
+                case "D": correctAnswer = questions[i][4];
+            };          
+            let answer
+            switch(userAnswers[i]){
+                case "A": answer = questions[i][1]; 
+                break;
+                case "B": answer = questions[i][2]; 
+                break;
+                case "C": answer = questions[i][3]; 
+                break;
+                case "D": answer = questions[i][4];
+            };          
+            checkedAnswers.answers.push(`On question ${i}: ${questions[i][0]} student gave wrong answer:${userAnswers[i]}-${answer}. Correct answer ${answers[i][0]}-${correctAnswer} (${questions[i][1]})`);
+        } else if (userAnswers[i]==="no answer"){
+            noAnswers++
+            checkedAnswers.answers.push(`On question ${i}: ${questions[i][0]} student didn't give any answer!`)
+        }
+    };
+    console.log(checkedAnswers);
+    questionForm.style.justifyContent = "normal";
+    questionForm.style.flexDirection = "column";
+    questionForm.style.alignContent = "center";
+    /*
     for(let keyAnswer of Object.entries(answers)){
         for(let answer of Object.entries(userAnswers)){
             if(keyAnswer[0]===answer[0] && keyAnswer[1][0] === answer[1]){
                 correctAnswers++;
+
             } else if( keyAnswer[0] === answer[0] && answer[1]!=="no answer" && keyAnswer[1][0]!==answer[1]){
                 wrongAnswers++;
             } else if(keyAnswer[0] === answer[0] && answer[1] === "no answer"){
@@ -23,11 +78,16 @@ function calculateAnswers(answers){
             }
         }
     }
-    const result = Math.round((correctAnswers/ /*Object.keys(answers).length)*/5*100)/100);
+    */
+    const result = Math.round((correctAnswers/ /*Object.keys(answers).length)*/5*100))/100;
     questionForm.innerHTML =`
-    <h2>${title}</h2>
-    <p> No answers: ${noAnswers}, correct answers ${correctAnswers}, wrong answers ${wrongAnswers}. </p>
-    <p> Result: ${result*100}%</p>
+    <h2>Congratulations you have finished your test!</h2>
+    <ul>
+        <li> No answers: ${noAnswers},</li>
+        <li> correct answers ${correctAnswers},</li>
+        <li> wrong answers ${wrongAnswers}.</li>
+        <li> Result: ${result*100}%</li>
+    </ul>
     `
 }
 
@@ -96,7 +156,7 @@ function nextQuestion(questionNumber, questions){
                 } else {return response.json();}
             })
             //and send to create form with question 
-            .then (json => calculateAnswers(json))
+            .then (json => calculateAnswers(json, questions))
         }
     };
 
@@ -106,6 +166,7 @@ function nextQuestion(questionNumber, questions){
 
 //apply questions
 function loadQuestion (questionNumber) {
+    testName = "b1p-diagnostic-test";
     //download questions 
     fetch("https://sweet-kleicha-edf916.netlify.app/b1p-diagnostic-test-a.json")
         .then(response => {

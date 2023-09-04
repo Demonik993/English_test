@@ -132,7 +132,11 @@
 #question #next-question-submit, #question #clear{
     position: initial;
 }
-
+#question-form ul li{
+  list-style: none;
+  font-size: larger;
+  padding-bottom: 10px;
+}
    
   }
 
