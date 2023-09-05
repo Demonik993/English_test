@@ -66,29 +66,39 @@ function calculateAnswers(answers, questions){
     questionForm.style.flexDirection = "column";
     questionForm.style.alignContent = "center";
     /*
-    for(let keyAnswer of Object.entries(answers)){
-        for(let answer of Object.entries(userAnswers)){
+    for(let keyAnswer of Object.entries(answers)){for(let answer of Object.entries(userAnswers)){
             if(keyAnswer[0]===answer[0] && keyAnswer[1][0] === answer[1]){
                 correctAnswers++;
-
             } else if( keyAnswer[0] === answer[0] && answer[1]!=="no answer" && keyAnswer[1][0]!==answer[1]){
                 wrongAnswers++;
             } else if(keyAnswer[0] === answer[0] && answer[1] === "no answer"){
                 noAnswers++;
-            }
-        }
-    }
+    }}};
     */
+
     const result = Math.round((correctAnswers/ /*Object.keys(answers).length)*/5*100))/100;
+
+    // SUMMARY TO SEND
+    checkedAnswers.summary = `Student gave ${correctAnswers} correct answers, ${wrongAnswers} and didn't answer on ${noAnswers}. The student result is ${result*100}% correct answer.`
+    //ADD SEND E-MAIL
+    emailjs.send('service_dckp35n', 'template_4ypd9ca', checkedAnswers)
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
+    //PREPARE BUTTON AND FUNCTION SHOW MY ANSWERS
+    //
     questionForm.innerHTML =`
     <h2>Congratulations you have finished your test!</h2>
     <ul>
-        <li> No answers: ${noAnswers},</li>
-        <li> correct answers ${correctAnswers},</li>
-        <li> wrong answers ${wrongAnswers}.</li>
-        <li> Result: ${result*100}%</li>
+        <li> You gave ${correctAnswers} correct answers.</li>
+        <li> You gave ${wrongAnswers} wrong answers.</li>
+        <li> You didn't response on ${noAnswers} questions.</li>
+        <li> Your result: ${result*100}%</li>
     </ul>
     `
+    console.log(checkedAnswers)
 }
 
 //add form with question
