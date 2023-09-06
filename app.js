@@ -3,6 +3,8 @@ const questionForm = document.querySelector('#question-form');
 const userAnswers = {};
 const questionTemplate = document.querySelector('[question-form-template]');
 const closeMark = document.querySelector('#closing-mark');
+const changeColor = document.querySelector('#dark-light');
+let colorLight = true;
 let questionNumber, testName;
 function closeTest() {
     const container = document.querySelector("#test-container");
@@ -10,6 +12,19 @@ function closeTest() {
 }
 //add button close test
 closeMark.onclick = ()=>{closeTest()};
+//add change color
+changeColor.onclick =()=>{
+    const style = document.querySelector('[rel="stylesheet"]');
+    if (colorLight){
+       style.setAttribute('href', "dark.css")
+       colorLight = false;
+       changeColor.innerHTML = "&#9790";
+    } else{
+       style.setAttribute('href', "style.css")
+       colorLight = true;
+       changeColor.innerHTML = "&#x263C";
+    } 
+}
 //show results to user
 function showAnswers(results){
     questionForm.innerHTML = "";
