@@ -63,7 +63,7 @@ function calculateAnswers(answers, questions){
         answers: []
     };
     const showResults = {};
-    for(let i=1; i<=5; i++){
+    for(let i=1; i<=Object.keys(answers).length; i++){
         if(answers[i][0]===userAnswers[i]){
             correctAnswers++;
             let answer;
@@ -123,7 +123,7 @@ function calculateAnswers(answers, questions){
     questionForm.style.flexDirection = "column";
     questionForm.style.alignContent = "center";
 
-    const result = Math.round((correctAnswers/ /*Object.keys(answers).length)*/5*100))/100;
+    const result = Math.round((correctAnswers/(Object.keys(answers).length)*100))/100;
 
     // SUMMARY TO SEND
     checkedAnswers.summary = `Student gave ${correctAnswers} correct answers, ${wrongAnswers} and didn't answer on ${noAnswers}. The student result is ${result*100}% correct answer.`
@@ -162,7 +162,7 @@ function nextQuestion(questionNumber, questions){
     //adding progress bar
     const progressBar = document.querySelector("#progress-bar");
     const progress = document.querySelector("#progress");
-    const width = Math.round((questionNumber/5/*Object.keys(questions).length ?*/)*100)/100;
+    const width = Math.round((questionNumber/Object.keys(questions).length)*100)/100;
     progress.style.width = `${width*(progressBar.offsetWidth)}px`;
    
     const question = questionTemplate.content.cloneNode(true).children[0];
@@ -174,8 +174,8 @@ function nextQuestion(questionNumber, questions){
     const ansD = question.querySelector('[for="ansD"]');
     const clear = question.querySelector('#clear');
     const button = question.querySelector('[type="submit"');
-    button.textContent = questionNumber</*Object.keys(questions).length ?*/5? "Next question" : "I'am done!";
-    button.title = questionNumber</*Object.keys(questions).length ?*/5? "Następne pytanie" : "Pokaż odpowiedzi";
+    button.textContent = questionNumber<Object.keys(questions).length ? "Next question" : "I'am done!";
+    button.title = questionNumber<Object.keys(questions).length ? "Następne pytanie" : "Pokaż odpowiedzi";
     legend.textContent = `Question ${questionNumber}`;
     questionVal.textContent = questions[questionNumber][0];
     ansA.textContent = questions[questionNumber][1];
@@ -207,7 +207,7 @@ function nextQuestion(questionNumber, questions){
         userAnswers[questionNumber] = answer;
         console.log(userAnswers);
         question.remove();
-        if(questionNumber</*Object.keys(questions).length ?*/5){
+        if(questionNumber<Object.keys(questions).length){
         questionNumber++;
         loadQuestion(questionNumber);
         } else {
