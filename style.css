@@ -43,6 +43,17 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+  #closing-mark{
+    position: absolute;
+    font-size: 2.5em;
+    right:10px;
+    top: 0px;
+    color: rgb(0,0,0,0.5);
+  }
+  #closing-mark:hover{
+    cursor: pointer;
+    color: black;
+  }
   #question  {
     width: 100%;
     text-align: center;
@@ -138,6 +149,6 @@
 #show-answers, #finish-test{
   position: unset;
 }
-   
+
   }
 

@@ -2,13 +2,14 @@ const form = document.querySelector('#user-data');
 const questionForm = document.querySelector('#question-form');
 const userAnswers = {};
 const questionTemplate = document.querySelector('[question-form-template]');
-
-let questionNumber;
-let testName;
+const closeMark = document.querySelector('#closing-mark');
+let questionNumber, testName;
 function closeTest() {
     const container = document.querySelector("#test-container");
     container.remove();
 }
+//add button close test
+closeMark.onclick = ()=>{closeTest()};
 //show results to user
 function showAnswers(results){
     questionForm.innerHTML = "";
@@ -158,8 +159,8 @@ function nextQuestion(questionNumber, questions){
     const ansD = question.querySelector('[for="ansD"]');
     const clear = question.querySelector('#clear');
     const button = question.querySelector('[type="submit"');
-    const buttonText = questionNumber</*Object.keys(questions).length ?*/5? "Next question" : "I'am done!"
-    button.textContent = buttonText;
+    button.textContent = questionNumber</*Object.keys(questions).length ?*/5? "Next question" : "I'am done!";
+    button.title = questionNumber</*Object.keys(questions).length ?*/5? "Następne pytanie" : "Pokaż odpowiedzi";
     legend.textContent = `Question ${questionNumber}`;
     questionVal.textContent = questions[questionNumber][0];
     ansA.textContent = questions[questionNumber][1];

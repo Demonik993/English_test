@@ -16,11 +16,13 @@
 </head>
 <body>
    <div id="test-container" >
-        <div id="question-form">
+            <div id="question-form">
             <div id="progress-bar">
                 <div id="progress"></div>
             </div>
-            
+            <div id="closing-mark" title="Close the test">
+                &#x3006
+            </div>
             <form id="user-data">
                 <fieldset>
                     <h2 id="question">Please enter you data</h2>
@@ -41,8 +43,8 @@
                         <p><input id="ansC" type="radio" value="C" name="answer"><label for="ansC"></label></p>
                         <p><input id="ansD" type="radio" value="D" name="answer"><label for="ansD"></label></p>
                     </fieldset>
-                      <button class="button" id="clear">Clear answer</button>
-                      <button class="button" id="next-question-submit" type="submit"></button>
+                      <button class="button" id="clear" title="Odnzacz wszystkie pola">Clear answer</button>
+                      <button class="button" id="next-question-submit" type="submit" title=""></button>
                 </form> 
             </template>
         </div>
