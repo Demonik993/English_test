@@ -16,39 +16,49 @@
 </head>
 <body>
    <div id="test-container" >
-            <div id="question-form">
+    <div id="user-data-container">
+        <div id="marks">
+            <div id="dark-light" title="Zmień kolor">&#x263C</div>
+            <div id="closing-mark" title="Close the test">&#x3006</div>
+        </div>
+        <form id="user-data">
+            <fieldset>
+                <h2 id="question">Please enter you data</h2>
+                <p><label for="first-name">Name:</label><input id="first-name" placeholder="John" type="text" required></p>
+                <p><label for="last-name">Surname:</label><input id="last-name" placeholder="Smith" type="text" required></p>
+                <p><label for="email">E-mail:</label><input id="email" type="email" placeholder="john.smith@gmail.com" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" ></p>
+                <legend>User data</legend>
+            </fieldset>
+            <div button-next>
+                <button class="button" type="submit">Next</button>
+            </div>
+        </form>
+    </div>
+    <template question-form-template>
+        <div id="question-form">  
             <div id="progress-bar">
                 <div id="progress"></div>
             </div>
-            <div id="dark-light" title="Zmień kolor">&#x263C</div>
-            <div id="closing-mark" title="Close the test">&#x3006</div>
-            <form id="user-data">
-                <fieldset>
-                    <h2 id="question">Please enter you data</h2>
-                    <p><label for="first-name">Name:</label><input id="first-name" placeholder="John" type="text" required></p>
-                    <p><label for="last-name">Surname:</label><input id="last-name" placeholder="Smith" type="text" required></p>
-                    <p><label for="email">E-mail:</label><input id="email" type="email" placeholder="john.smith@gmail.com" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" ></p>
-                    <legend>User data</legend>
+            <div id="marks">
+                <div id="dark-light" title="Zmień kolor">&#x263C</div>
+                <div id="closing-mark" title="Close the test">&#x3006</div>
+            </div>  
+            <form id="question">
+                <fieldset class="question-field">
+                    <legend></legend>
+                    <h2 questionText></h2>
+                    <p><input id="ansA" type="radio" value="A" name="answer"><label for="ansA"></label></p>
+                    <p><input id="ansB" type="radio" value="B" name="answer"><label for="ansB"></label></p>
+                    <p><input id="ansC" type="radio" value="C" name="answer"><label for="ansC"></label></p>
+                    <p><input id="ansD" type="radio" value="D" name="answer"><label for="ansD"></label></p>
                 </fieldset>
-                <button class="button" type="submit">Next</button>
-            </form>
-            <template question-form-template>
-                <form id="question">
-                    <fieldset class="question-field">
-                        <legend></legend>
-                        <h2 questionText></h2>
-                        <p><input id="ansA" type="radio" value="A" name="answer"><label for="ansA"></label></p>
-                        <p><input id="ansB" type="radio" value="B" name="answer"><label for="ansB"></label></p>
-                        <p><input id="ansC" type="radio" value="C" name="answer"><label for="ansC"></label></p>
-                        <p><input id="ansD" type="radio" value="D" name="answer"><label for="ansD"></label></p>
-                    </fieldset>
-                    <p id="buttons">
-                      <button class="button" id="clear" title="Odnzacz wszystkie pola">Clear answer</button>
-                      <button class="button" id="next-question-submit" type="submit" title=""></button>
-                    </p>
-                </form> 
-            </template>
+                <div id="buttons">
+                    <button class="button" id="clear" title="Odnzacz wszystkie pola">Clear answer</button>
+                    <button class="button" id="next-question-submit" type="submit" title=""></button>
+                </div>
+            </form> 
         </div>
+    </template>
    </div> 
    <script src="app.js"></script>
 </body>

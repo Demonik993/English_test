@@ -1,6 +1,4 @@
-const container = document.querySelector("#test-container");
 const form = document.querySelector('#user-data');
-const userContainer = document.querySelector("#user-data-container")
 const questionForm = document.querySelector('#question-form');
 const userAnswers = {};
 const questionTemplate = document.querySelector('[question-form-template]');
@@ -9,9 +7,13 @@ const changeColor = document.querySelector('#dark-light');
 let colorLight = true;
 let questionNumber, testName;
 function closeTest() {
+    const container = document.querySelector("#test-container");
     container.remove();
 }
-function apperinance (){
+//add button close test
+closeMark.onclick = ()=>{closeTest()};
+//add change color
+changeColor.onclick =()=>{
     const style = document.querySelector('[rel="stylesheet"]');
     if (colorLight){
        style.setAttribute('href', "dark.css")
@@ -23,10 +25,6 @@ function apperinance (){
        changeColor.innerHTML = "&#x263C";
     } 
 }
-//add button close test
-closeMark.onclick = ()=>{closeTest()};
-//add change color
-changeColor.onclick =()=>{apperinance()}
 //show results to user
 function showAnswers(results){
     questionForm.innerHTML = "";
@@ -162,12 +160,12 @@ function calculateAnswers(answers, questions){
 //add form with question
 function nextQuestion(questionNumber, questions){
     //adding progress bar
+    const progressBar = document.querySelector("#progress-bar");
+    const progress = document.querySelector("#progress");
     const width = Math.round((questionNumber/Object.keys(questions).length)*100)/100;
-       
+    progress.style.width = `${width*(progressBar.offsetWidth)}px`;
+   
     const question = questionTemplate.content.cloneNode(true).children[0];
-    console.log(question)
-    const progressBar = question.querySelector("#progress-bar");
-    const progress = question.querySelector("#progress");
     const legend = question.querySelector('legend');
     const questionVal = question.querySelector('[questionText]');
     const ansA = question.querySelector('[for="ansA"]');
@@ -176,9 +174,6 @@ function nextQuestion(questionNumber, questions){
     const ansD = question.querySelector('[for="ansD"]');
     const clear = question.querySelector('#clear');
     const button = question.querySelector('[type="submit"');
-    const close = question.querySelector('#closing-mark');
-    const changeColor = question.querySelector('#dark-light');
-    progress.style.width = `${width*(progressBar.offsetWidth)}px`;
     button.textContent = questionNumber<Object.keys(questions).length ? "Next question" : "I'am done!";
     button.title = questionNumber<Object.keys(questions).length ? "Następne pytanie" : "Pokaż odpowiedzi";
     legend.textContent = `Question ${questionNumber}`;
@@ -187,7 +182,7 @@ function nextQuestion(questionNumber, questions){
     ansB.textContent = questions[questionNumber][2];
     ansC.textContent = questions[questionNumber][3];
     ansD.textContent = questions[questionNumber][4];
-    container.appendChild(question);
+    questionForm.appendChild(question);
     const answers = document.querySelectorAll('input');
       //add possibility to unchecked the input;
     clear.addEventListener('click', (e)=>{
@@ -201,10 +196,8 @@ function nextQuestion(questionNumber, questions){
         if(e.target === "enter")
         answers.forEach(ans=>{
             if(ans.checked) ans.checked = false;
-        });
+        })
     }); 
-    close.onclick= () =>{closeTest()}
-    changeColor.onclick= () =>{apperinance()}
     //adding answer and if done calculate results and send it on e-mail
     question.onsubmit = async (e) =>{
         e.preventDefault();
@@ -258,7 +251,7 @@ form.onsubmit = async (e) =>{
     userAnswers.student = {Name:`${name}`, Surname:`${surname}`, email:`${email}`};
     
     //delete inner HTML of user container form
-    userContainer.remove();
+    form.remove();
     //load test
     questionNumber = 1;
     loadQuestion(questionNumber);

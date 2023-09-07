@@ -1,7 +1,7 @@
 @media (min-width: 600px){
   body {
     letter-spacing: 1px;
-    color:white;
+    color: white;
   }
   #test-container{
     position: absolute;
@@ -16,296 +16,128 @@
     display: flex;
     justify-content: center;
   }
-  #progress-bar{
-    z-index: 11;
-    height: 10px;
+  #user-data-container{
+    height: fit-content;
+    min-width: fit-content;
     background-color: black;
-    position: relative;
-    top: -20px;
-    height: 5px;
-    width: 600px;
-    box-shadow: 0 0 10px black;
-  }
-  #progress {
-    height: inherit;
-    background-color: rgb(30,255,0);
-    width: 0;
-  }
-  #question-form {
-    display: flex;
-    z-index: 11;
-    position: relative;
+    box-shadow: 0 0  10px white;
+    padding: 2% 5%;
+    position: sticky;
     top: 50px;
-    height: 400px;
-    width: 600px;
-    background-color: black;
-    border-radius: 5px;
-    box-shadow: 0 0 10px white;
-    flex-direction: row;
-    align-content: stretch;
-    justify-content: center;
-    flex-wrap: wrap;
+    border-radius: 20px;
   }
-  #closing-mark{
-    position: absolute;
-    font-size: 2.5em;
-    right:10px;
-    top: 0px;
+  #marks{
+    display: flex;
+    gap: 10px;
+    font-size: 1.7em;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: -10px;
     color: rgb(250,250,250,0.5);
   }
   #closing-mark:hover, #dark-light:hover{
     cursor: pointer;
     color: white;
   }
-  #dark-light{
-    text-decoration: double;
-    position: absolute;
-    font-size: 2em;
-    right:65px;
-    top: 4px;
-    color: rgb(250,250,250,0.5);
+  #user-data{
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    align-content: center;
   }
-  
-  #question  {
-    width: 100%;
-    text-align: center;
+  #user-data fieldset{
+    padding: 0 30px;
+    border-radius: 20px;
   }
-  #question-form form {
-    display: block;
-    padding: 1em 2em 1em 2em;
-    width: fit-content;
-    min-width: 30%;
-  }
-  #question-form fieldset {
-    display: block;
-    margin-inline-start: 2px;
-    margin-inline-end: 2px;
-    padding-block-start: 0.35em;
-    padding-inline-start: 0.75em;
-    padding-inline-end: 0.75em;
-    padding-block-end: 0.625em;
-    border: 2px groove rgb(192, 192, 192);
-    border-image: initial;
-  }
-  #question-form p {
+  #user-data fieldset p{
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+    align-items: flex-end;
   }
-  #question-form p input{
-    min-width: 200px;
+  #user-data fieldset p label{
+    font-size: 1.1em;
   }
-  .button {
-    position: relative;
-    left: 250px;
+  #user-data fieldset p input{
+    padding: 2px 5px;
+    border: solid white 1px;
+    border-radius: 5px;
+  }
+  .button{
     color: black;
     text-decoration: double;
     background-color: white;
     border: solid 2px white;
     border-radius: 10px;
-    margin-right: 1em;
-    padding: 2px 10px;
+    padding: 0px 10px;
     font-size: large;
     box-shadow: 2px 2px 5px white;
-    margin-top: 10px;
-}
-.button:hover{
-    cursor: pointer;
-    border: 2px black solid; 
-    color: white;
-    background-color: black;
-}
-.button:active{
-    color: white;
-    background-color: black;
-    cursor: pointer;
-    border: 2px white solid;
-    box-shadow: none; 
-}
-#question .question-field{
-    text-align: left;
-}
-
-#question .question-field p {
-  justify-content: flex-start;
-  gap:20px;
-}
-#question .question-field p input {
-  min-width: 10px;
-  appearance: none;
-  border-radius: 30%;
-  width: 1em;
-  height: 1em;
-  border: 2px solid #999;
-  transition: 0.2s all linear;
-  margin-right: 5px;
-  position: relative;
-  top: 0;
-}
-#question .question-field p input:hover
-{
-  background-color: white;
-  border-color: black;
-  box-shadow: 10px grey;
-}
-#question .question-field p input:checked{
-  background-color: white;
-  border-color: white;
-} 
-#question #next-question-submit, #question #clear{
-    position: initial;
-}
-#question-form ul li{
-  list-style: none;
-  font-size: larger;
-  padding-bottom: 10px;
-}
-#show-answers, #finish-test{
-  position: unset;
-}
-
+    margin: 5px 2px 0 0;
   }
-  @media (max-width: 599px){
-    body{
+  .button:hover{
+      cursor: pointer;
+      border: 2px black solid; 
+  }
+  .button:active{
       color: white;
-      margin:0;
-      padding:0;
-    }
-      #test-container{
-        position: absolute;
-        top: 0;
-        left: 0;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10;
-        background-color:black
-      }
-      #progress-bar{
-        z-index: 11;
-        background-color: antiquewhite;
-        position: relative;
-        top: -20px;
-        height: 5px;
-        width: 100%;
-        box-shadow: 0 0 10px white;
-      }
-      #progress {
-        height: inherit;
-        background-color: rgb(30,255,0);
-        width: 0;
-      }
-      #question-form {
-        display: block;
-        z-index: 11;
-        position: relative;
-        top: 50px;
-        height: fit-content;
-        width: 100%;
-        background-color: black;
-      }
-      #closing-mark{
-        position: absolute;
-        font-size: 2.5em;
-        right:10px;
-        top: 0px;
-        color: rgb(250,250,250,0.5);
-      }
-      #dark-light{
-        text-decoration: double;
-        position: absolute;
-        font-size: 2em;
-        right:60px;
-        top: 0px;
-        color: rgb(250,250,250,0.5);
-        justify-content: center;
-        align-items: center;
-      }
-      h2{
-        font-size: 1.3em;
-      }
-      #question  {
-        width: 100%;
-        text-align: center;
-      }
-      #question-form form {
-        display: block;
-     }
-      #question-form fieldset {
-        position: relative;
-        top: 40px;
-        display: block;
-      }
-      #question-form p {
-        display: block;
-        gap: 5px;
-      }
-      #question-form p input{
-        padding-top: 5px;
-        width: 90%;
-      }
-      .button {
-        position: relative;
-        top: 30px;
-        left: 60%;
-        color: black;
-        text-decoration: double;
-        background-color: white;
-        border: solid 2px white;
-        border-radius: 10px;
-        margin-right: 1em;
-        padding: 2px 10px;
-        font-size: 1.1em;
-        box-shadow: 2px 2px 5px white;
-        margin-top: 10px;
-      }
-      #question #buttons{
-        display: flex;
-        position: relative;
-        top: 20px;
-        font-size: smaller;
-        margin-block-start: 0;
-        margin-block-end: 0;
-        justify-content: flex-end;
-      }
-      #question .question-field{
-          text-align: left;
-      }
-    
-      #question .question-field p {
-        justify-content: flex-start;
-        gap:20px;
-      }
-      #question .question-field p input {
-        min-width: 10px;
-        appearance: none;
-        border-radius: 30%;
-        width: 1em;
-        height: 1em;
-        border: 2px solid #999;
-        transition: 0.2s all linear;
-        margin-right: 5px;
-        position: relative;
-        bottom: -2px;
-      }
-      #question-form .button{
-        position: unset;
-      }
-      
-      #question .question-field p input:checked{
-        background-color: white;
-        border-color: whi;
-      } 
-      #question #next-question-submit, #question #clear{
-          position: initial;
-      }
-      #question-form ul li{
-        list-style: none;
-        font-size: larger;
-        padding-bottom: 10px;
-      }
-      #show-answers, #finish-test{
-        position: unset;
-      }
-    }
+      background-color: black;
+      cursor: pointer;
+      border: 2px white solid;
+      box-shadow: none; 
+  }
+  #user-data div{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  #question-form{
+    height: fit-content;
+    width: 600px;
+    background-color: black;
+    box-shadow: 0 0  10px white;
+    padding: 2% 5%;
+    position: sticky;
+    top: 50px;
+    border-radius: 20px;
+  }
+  #buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  .question-field {
+    border-radius: 10px;
+  }
+  .question-field p {
+    margin-left: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .question-field p:hover, label:hover{
+    cursor: pointer;
+  }
+  .question-field p input {
+    appearance: none;
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 1.3em;
+  }
+  #ansA:before{content: "A";}
+  #ansB:before{content: "B";}
+  #ansC:before{content: "C";}
+  #ansD:before{content: "D";}
+  .question-field p input:before{
+    font-size: 1.2em;
+    position: relative;
+    top: -4px;
+    left: 2px;
+    color: white;
+  }
+ .question-field p input:hover{
+    background-color: aquamarine;
+  }
+  .question-field p input:checked{
+    border: 2px solid green;
+  }
+}
