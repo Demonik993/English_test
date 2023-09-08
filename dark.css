@@ -119,8 +119,8 @@
   }
   .question-field p input {
     appearance: none;
-    width: 1.3em;
-    height: 1.3em;
+    width: 1.6em;
+    height: 1.6em;
     border-radius: 1.3em;
   }
   #ansA:before{content: "A";}
@@ -130,8 +130,8 @@
   .question-field p input:before{
     font-size: 1.2em;
     position: relative;
-    top: -4px;
-    left: 2px;
+    top: 1px;
+    left: 4px;
     color: white;
   }
  .question-field p input:hover{
@@ -139,5 +139,35 @@
   }
   .question-field p input:checked{
     border: 2px solid green;
+  }
+  #progress-bar{
+    position: relative;
+    top: -30px;
+    width: 600px;
+    height: 5px;
+    background-color: black;
+    box-shadow: 0 0 5px white;
+  }
+  #progress{
+    height: 5px;
+    background-color: antiquewhite;
+  }
+  .congrats{
+    position: relative;
+    top:50px;
+    border-radius: 20px;
+    display: flex;
+    width:600px;
+    background: black;
+    align-content: center;
+    flex-flow: column wrap;
+    height: fit-content;
+    padding-bottom: 1.5em;
+    align-items: flex-end;
+    box-shadow: 0 0 10px white;
+  }
+  #finish-test{
+    width: fit-content;
+    position: relative;
   }
 }

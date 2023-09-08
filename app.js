@@ -11,7 +11,7 @@ let questionNumber, testName;
 function closeTest() {
     container.remove();
 }
-function apperinance (){
+function appearance (){
     const style = document.querySelector('[rel="stylesheet"]');
     if (colorLight){
        style.setAttribute('href', "dark.css")
@@ -26,8 +26,8 @@ function apperinance (){
 //add button close test
 closeMark.onclick = ()=>{closeTest()};
 //add change color
-changeColor.onclick =()=>{apperinance()}
-//show results to user
+changeColor.onclick =()=>{appearance()}
+/*show results to user - client does'nt want to this
 function showAnswers(results){
     questionForm.innerHTML = "";
     questionForm.style = "display:block; height:fit-content; width:fit-content; padding: 20px"
@@ -50,10 +50,9 @@ function showAnswers(results){
     questionForm.appendChild(closeResults);
 
 }
-
+*/
 //calculate and send answers
 function calculateAnswers(answers, questions){
-    questionForm.innerHTML = "";
     let noAnswers=0;
     let correctAnswers=0;
     let wrongAnswers=0;
@@ -120,15 +119,11 @@ function calculateAnswers(answers, questions){
             showResults[`Question ${i}`] = [questions[i][0], "no answer", correctAnswer, answers[i][1]];
         }
     };
-    console.log(checkedAnswers);
-    questionForm.style.justifyContent = "normal";
-    questionForm.style.flexDirection = "column";
-    questionForm.style.alignContent = "center";
-
+      
     const result = Math.round((correctAnswers/(Object.keys(answers).length)*100))/100;
 
     // SUMMARY TO SEND
-    checkedAnswers.summary = `Student gave ${correctAnswers} correct answers, ${wrongAnswers} and didn't answer on ${noAnswers}. The student result is ${result*100}% correct answer.`
+    checkedAnswers.summary = `Student gave ${correctAnswers} correct answers, ${wrongAnswers} wrong and didn't answer on ${noAnswers}. The student result is ${result*100}% correct answer.`
     //ADD SEND E-MAIL
     emailjs.send('service_dckp35n', 'template_4ypd9ca', checkedAnswers)
     .then(function(response) {
@@ -136,36 +131,30 @@ function calculateAnswers(answers, questions){
     }, function(error) {
        console.log('FAILED...', error);
     });
-    
-    questionForm.innerHTML =`
-    <h2>Congratulations you have finished your test!</h2>
-    <ul>
-        <li> You gave ${correctAnswers} correct answers.</li>
-        <li> You gave ${wrongAnswers} wrong answers.</li>
-        <li> You didn't response on ${noAnswers} questions.</li>
-        <li> Your result: ${result*100}%</li>
-    </ul>
-    <p>
-        <button class="button" id="show-answers"> Show my answers </button>
-        <button class="button" id="finish-test"> Finish the test </button>
-    </p>
-    `
+    const congrats = document.createElement('div');
+    congrats.className = "congrats"
+    congrats.innerHTML = "<h2>Congratulations you have finished your test!</h2>"
+    const button = document.createElement('button');
+    button.className = "button";
+    button.id = "finish-test";
+    button.textContent = "OK"
+    congrats.appendChild(button);
+    container.appendChild(congrats)
     // BUTTON SHOW MY ANSWERS
-    const showMeAnswer = document.querySelector('#show-answers');
-    showMeAnswer.addEventListener('click', ()=>{showAnswers(showResults)});
+    //const showMeAnswer = document.querySelector('#show-answers');
+    //showMeAnswer.addEventListener('click', ()=>{showAnswers(showResults)});
     //BUTTON TO DELETE ALL TEST DIV (TO USE IT ON OTHER WEBSITE)
     const close = document.querySelector("#finish-test");
     close.addEventListener('click', ()=> {closeTest()});
 
+    
 }
 
 //add form with question
 function nextQuestion(questionNumber, questions){
     //adding progress bar
-    const width = Math.round((questionNumber/Object.keys(questions).length)*100)/100;
-       
+    const width = Math.round(questionNumber/5 /*Object.keys(questions).length*/ *100)/100;
     const question = questionTemplate.content.cloneNode(true).children[0];
-    console.log(question)
     const progressBar = question.querySelector("#progress-bar");
     const progress = question.querySelector("#progress");
     const legend = question.querySelector('legend');
@@ -178,16 +167,18 @@ function nextQuestion(questionNumber, questions){
     const button = question.querySelector('[type="submit"');
     const close = question.querySelector('#closing-mark');
     const changeColor = question.querySelector('#dark-light');
-    progress.style.width = `${width*(progressBar.offsetWidth)}px`;
-    button.textContent = questionNumber<Object.keys(questions).length ? "Next question" : "I'am done!";
-    button.title = questionNumber<Object.keys(questions).length ? "Następne pytanie" : "Pokaż odpowiedzi";
-    legend.textContent = `Question ${questionNumber}`;
+    button.textContent = questionNumber<5/*Object.keys(questions).length*/ ? "Next question" : "I'am done!";
+    button.title = questionNumber<5/*Object.keys(questions).length */? "Następne pytanie" : "Pokaż odpowiedzi";
+    legend.textContent = `Question ${questionNumber}/${Object.keys(questions).length}`;
     questionVal.textContent = questions[questionNumber][0];
     ansA.textContent = questions[questionNumber][1];
     ansB.textContent = questions[questionNumber][2];
     ansC.textContent = questions[questionNumber][3];
     ansD.textContent = questions[questionNumber][4];
     container.appendChild(question);
+    const progressContainer = document.querySelector('#progress-bar')
+    console.log(progressContainer.offsetWidth)
+    document.querySelector('#progress').style.width = `${width*(progressContainer.offsetWidth)}px`;
     const answers = document.querySelectorAll('input');
       //add possibility to unchecked the input;
     clear.addEventListener('click', (e)=>{
@@ -204,7 +195,7 @@ function nextQuestion(questionNumber, questions){
         });
     }); 
     close.onclick= () =>{closeTest()}
-    changeColor.onclick= () =>{apperinance()}
+    changeColor.onclick= () =>{appearance()}
     //adding answer and if done calculate results and send it on e-mail
     question.onsubmit = async (e) =>{
         e.preventDefault();
@@ -214,7 +205,7 @@ function nextQuestion(questionNumber, questions){
         userAnswers[questionNumber] = answer;
         console.log(userAnswers);
         question.remove();
-        if(questionNumber<Object.keys(questions).length){
+        if(questionNumber<5/*Object.keys(questions).length*/){
         questionNumber++;
         loadQuestion(questionNumber);
         } else {
@@ -262,5 +253,4 @@ form.onsubmit = async (e) =>{
     //load test
     questionNumber = 1;
     loadQuestion(questionNumber);
-
 }
