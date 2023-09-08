@@ -171,3 +171,175 @@
     position: relative;
   }
 }
+@media (max-width: 599px){
+  body {
+    letter-spacing: 1px;
+    color: white;
+  }
+  #test-container{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+  }
+  #user-data-container{
+    display: flex;
+    flex-flow: wrap column;
+    width: 100%;
+    background-color: black;
+  }
+  #marks{
+    position: relative;
+    top: 2%;
+    right:5%;
+    display: flex;
+    gap: 10px;
+    font-size: 1.7em;
+    justify-content: flex-end;
+    align-items: center;
+    color: rgb(250,250,250,0.5);
+  }
+  #user-data{
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    position: relative;
+    top: 5%;
+  }
+  #user-data fieldset legend{
+    display: none;
+  }
+  #user-data fieldset{
+    padding: 0 0;
+    border: none;
+    width: 90%;
+  }
+  #user-data fieldset p{
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  #user-data fieldset p label{
+    font-size: 1.1em;
+  }
+  #user-data fieldset p input{
+    padding: 2px 5px;
+    border: solid white 1px;
+    border-radius: 5px;
+    font-size: 1.2em;
+  }
+  .button{
+    text-align: center;
+  color: black;
+    background-color: white;
+    border: solid 2px white;
+    border-radius: 10px;
+    padding: 2px;
+    font-size: large;
+    box-shadow: 2px 2px 5px white;
+    margin: 0.5em 0;
+    width: 90%;
+  }
+   .button:active{
+      color: white;
+      background-color: black;
+      cursor: pointer;
+      border: 2px white solid;
+      box-shadow: none; 
+  }
+  #user-data div{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  #question-form{
+    height: fit-content;
+    width: 100%;
+    background-color: black;
+    box-shadow: 0 0  10px white;
+    padding: 2% 5%;
+    position: sticky;
+    top: 50px;
+    border-radius: 20px;
+  }
+  #buttons{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    margin: 2px 2px;
+  }
+  .question-field {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    align-items: center;
+  }
+  .question-field legend{
+    font-size: smaller;
+  }
+  .question-field p {
+    font-size: larger;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: 8px;
+  }
+  .question-field p label {
+    display: flex;
+    border: 1px solid white;
+    min-width: 90%;
+    border-radius: 10px;
+    text-justify: center;
+    justify-content: center;
+  }
+  .question-field p input {
+    appearance: none;
+  }
+ .question-field p input:checked + label{
+    background-color: green;
+    color: whitesmoke;
+  }
+  #progress-bar{
+    position: relative;
+    top: -30px;
+    width: 100%;
+    height: 5px;
+    background-color: black;
+    box-shadow: 0 0 5px white;
+  }
+  #progress{
+    height: 5px;
+    background-color: white;
+  }
+  .congrats h2{
+    display: flex;
+    justify-content: center;
+  }
+
+  .congrats{
+    position: relative;
+    top:50px;
+    background: black;
+    padding:0 0 1.5em 1.2em;
+    box-shadow: 0 0 10px white;
+    height: fit-content;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    justify-items: center;
+  }
+  #finish-test{
+    width: 50%;
+  }
+}
