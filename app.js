@@ -153,7 +153,7 @@ function calculateAnswers(answers, questions){
 //add form with question
 function nextQuestion(questionNumber, questions){
     //adding progress bar
-    const width = Math.round(questionNumber/5 /*Object.keys(questions).length*/ *100)/100;
+    const width = Math.round((questionNumber/Object.keys(questions).length)*100)/100;
     const question = questionTemplate.content.cloneNode(true).children[0];
     const progressBar = question.querySelector("#progress-bar");
     const progress = question.querySelector("#progress");
@@ -167,8 +167,8 @@ function nextQuestion(questionNumber, questions){
     const button = question.querySelector('[type="submit"');
     const close = question.querySelector('#closing-mark');
     const changeColor = question.querySelector('#dark-light');
-    button.textContent = questionNumber<5/*Object.keys(questions).length*/ ? "Next question" : "I'am done!";
-    button.title = questionNumber<5/*Object.keys(questions).length */? "Następne pytanie" : "Pokaż odpowiedzi";
+    button.textContent = questionNumber<Object.keys(questions).length ? "Next question" : "I'am done!";
+    button.title = questionNumber<Object.keys(questions).length? "Następne pytanie" : "Pokaż odpowiedzi";
     legend.textContent = `Question ${questionNumber}/${Object.keys(questions).length}`;
     questionVal.textContent = questions[questionNumber][0];
     ansA.textContent = questions[questionNumber][1];
@@ -203,9 +203,8 @@ function nextQuestion(questionNumber, questions){
         console.log(answers);
         answers.forEach(ans =>{answer = ans.checked ? ans.value : answer = answer});
         userAnswers[questionNumber] = answer;
-        console.log(userAnswers);
         question.remove();
-        if(questionNumber<5/*Object.keys(questions).length*/){
+        if(questionNumber<Object.keys(questions).length){
         questionNumber++;
         loadQuestion(questionNumber);
         } else {
