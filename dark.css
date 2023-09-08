@@ -186,7 +186,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 10;
-    background-color: rgba(0,0,0,0.3);
+    background-color: white;
     display: flex;
     justify-content: center;
   }
