@@ -16,12 +16,13 @@ function appearance (){
     if (colorLight){
        style.setAttribute('href', "dark.css")
        colorLight = false;
-       changeColor.innerHTML = "&#9790";
+       document.querySelector('#dark-light').innerHTML = "&#9790";
+       
     } else{
-       style.setAttribute('href', "style.css")
+       style.setAttribute('href', "style.css");
        colorLight = true;
-       changeColor.innerHTML = "&#x263C";
-    } 
+       document.querySelector('#dark-light').innerHTML = "&#x263C";
+    };
 }
 //add button close test
 closeMark.onclick = ()=>{closeTest()};
@@ -167,6 +168,7 @@ function nextQuestion(questionNumber, questions){
     const button = question.querySelector('[type="submit"');
     const close = question.querySelector('#closing-mark');
     const changeColor = question.querySelector('#dark-light');
+    changeColor.innerHTML = colorLight ? "&#x263C":"&#9790";
     button.textContent = questionNumber<Object.keys(questions).length ? "Next question" : "I'am done!";
     button.title = questionNumber<Object.keys(questions).length? "Następne pytanie" : "Pokaż odpowiedzi";
     legend.textContent = `Question ${questionNumber}/${Object.keys(questions).length}`;

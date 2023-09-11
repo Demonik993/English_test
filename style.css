@@ -33,6 +33,8 @@
     align-items: center;
     margin-right: -10px;
     color: rgb(0,0,0,0.5);
+    position: relative;
+    top: -25px;
   }
   #closing-mark:hover, #dark-light:hover{
     cursor: pointer;
@@ -139,7 +141,7 @@
   }
   #progress-bar{
     position: relative;
-    top: -30px;
+    top: -15px;
     width: 600px;
     height: 5px;
     background-color: antiquewhite;
@@ -173,7 +175,6 @@
     letter-spacing: 1px;
   }
   #test-container{
-    display: flex;
     position: absolute;
     top: 0;
     left: 0;
@@ -195,8 +196,7 @@
   }
   #marks{
     position: relative;
-    top: 2%;
-    right:5%;
+    top: -30px;
     display: flex;
     gap: 10px;
     font-size: 1.7em;
@@ -205,13 +205,12 @@
     color: rgb(0,0,0,0.5);
   }
   #user-data{
-    display: flex;
-    flex-flow: wrap column;
-    align-items: center;
-    align-content: center;
+    display: grid;
+    justify-items: center;
+    grid-template-rows: repeat(5, 1fr);
     width: 100%;
     position: relative;
-    top: 5%;
+    top: 10%;
   }
   #user-data fieldset legend{
     display: none;
@@ -220,6 +219,11 @@
     padding: 0 0;
     border: none;
     width: 90%;
+    grid-row: 1 / 4;
+  }
+  #user-data fieldset h2{
+    text-align: center;
+    margin: 0;
   }
   #user-data fieldset p{
     display: flex;
@@ -247,6 +251,7 @@
     box-shadow: 2px 2px 5px black;
     margin: 0.5em 0;
     width: 90%;
+    height: 50%;
   }
    .button:active{
       color: black;
@@ -309,7 +314,7 @@
   }
   #progress-bar{
     position: relative;
-    top: -30px;
+    top: -20px;
     width: 100%;
     height: 5px;
     background-color: antiquewhite;
