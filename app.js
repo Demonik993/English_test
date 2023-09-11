@@ -189,15 +189,9 @@ function nextQuestion(questionNumber, questions){
             if(ans.checked) ans.checked = false;
         })
     });
-    clear.addEventListener('keyevent', (e)=>{
-        e.preventDefault();
-        if(e.target === "enter")
-        answers.forEach(ans=>{
-            if(ans.checked) ans.checked = false;
-        });
-    }); 
-    close.onclick= () =>{closeTest()}
-    changeColor.onclick= () =>{appearance()}
+    
+    close.onclick= () =>{closeTest()};
+    changeColor.onclick= () =>{appearance()};
     //adding answer and if done calculate results and send it on e-mail
     question.onsubmit = async (e) =>{
         e.preventDefault();
