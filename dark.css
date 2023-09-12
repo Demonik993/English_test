@@ -262,6 +262,7 @@
     font-size: large;
     box-shadow: 2px 2px 5px white;
     padding: 10px 10px;
+    font-weight: none;
   }
   .button:active{
       color: white;
