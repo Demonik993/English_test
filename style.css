@@ -16,31 +16,37 @@
     justify-content: center;
   }
   #user-data-container{
+    display: grid;
     height: fit-content;
-    min-width: fit-content;
+    grid-template-rows: 10px auto auto 10px;
+    grid-template-columns: 30px auto 30px;
     background-color: white;
-    box-shadow: 0 0  10px black;
-    padding: 2% 5%;
+    box-shadow: 0 0 10px black;
     position: sticky;
     top: 50px;
     border-radius: 20px;
+    min-width: fit-content;
   }
   #marks{
+    grid-area: 2/2;
     display: flex;
     gap: 10px;
     font-size: 1.7em;
     justify-content: flex-end;
     align-items: center;
-    margin-right: -10px;
     color: rgb(0,0,0,0.5);
-    position: relative;
-    top: -25px;
+    margin-bottom: 10px;
+  }
+  #marks p{
+    padding: 0;
+    margin:0;
   }
   #closing-mark:hover, #dark-light:hover{
     cursor: pointer;
     color: black;
   }
   #user-data{
+    grid-area: 3/2;
     display: flex;
     flex-flow: wrap column;
     align-items: center;
@@ -69,10 +75,11 @@
     background-color: black;
     border: solid 2px black;
     border-radius: 10px;
-    padding: 0px 10px;
+    padding: 5px 10px;
     font-size: large;
-    box-shadow: 2px 2px 5px black;
-    margin: 5px 2px 0 0;
+    box-shadow: 0 0 5px black;
+    margin-top: 10px;
+    width: 40%;
   }
   .button:hover{
       cursor: pointer;
@@ -91,19 +98,24 @@
     justify-content: flex-end;
   }
   #question-form{
+    display: grid;
+    grid-template-rows: 10px auto 20px auto 10px;
+    grid-template-columns: 30px auto 30px;
     height: fit-content;
     width: 600px;
     background-color: white;
     box-shadow: 0 0  10px black;
-    padding: 2% 5%;
     position: sticky;
     top: 50px;
     border-radius: 20px;
   }
+  #question{
+    grid-area: 4/2;
+  }
   #buttons{
     display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+    justify-content: space-evenly;
+
   }
   .question-field {
     border-radius: 10px;
@@ -140,9 +152,8 @@
     border: 2px solid green;
   }
   #progress-bar{
-    position: relative;
-    top: -15px;
-    width: 600px;
+    grid-area: 3/2/3/2;
+    
     height: 5px;
     background-color: antiquewhite;
     box-shadow: 0 0 5px black;
@@ -188,38 +199,40 @@
     justify-content: center;
   }
   #user-data-container{
-    display: flex;
-    flex-flow: wrap column;
+    display: grid;
+    grid-template-rows: 50px 80px auto 50px;
+    grid-template-columns: 10px auto 10px;
     width: 100%;
     background-color: white;
 
   }
   #marks{
-    position: relative;
-    top: -30px;
+    grid-area: 2/2;
     display: flex;
+    justify-content: flex-end;
     gap: 10px;
     font-size: 1.7em;
-    justify-content: flex-end;
-    align-items: center;
     color: rgb(0,0,0,0.5);
   }
   #user-data{
+    grid-area: 3/2;
     display: grid;
     justify-items: center;
-    grid-template-rows: repeat(5, 1fr);
     width: 100%;
-    position: relative;
-    top: 10%;
+    grid-template-rows: auto auto;
   }
   #user-data fieldset legend{
     display: none;
   }
   #user-data fieldset{
+    grid-area: 1;
     padding: 0 0;
     border: none;
-    width: 90%;
-    grid-row: 1 / 4;
+    width:100%;
+    height: fit-content;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    align-items: center;
   }
   #user-data fieldset h2{
     text-align: center;
@@ -229,13 +242,14 @@
     display: flex;
     flex-flow: wrap column;
     justify-content: flex-end;
-    gap: 2px;
+    gap: 8px;
+    margin: 0 0 15px 0;
   }
   #user-data fieldset p label{
     font-size: 1.1em;
   }
   #user-data fieldset p input{
-    padding: 2px 5px;
+    padding: 10px 5px;
     border: solid black 1px;
     border-radius: 5px;
     font-size: 1.2em;
@@ -246,15 +260,11 @@
     background-color: black;
     border: solid 2px black;
     border-radius: 10px;
-    padding: 2px;
     font-size: large;
     box-shadow: 2px 2px 5px black;
-    margin: 0.5em 0;
-    width: 90%;
-    height: 50%;
-    padding: 5px 0;
+    padding: 10px 10px;
   }
-   .button:active{
+  .button:active{
       color: black;
       background-color: white;
       cursor: pointer;
@@ -262,22 +272,27 @@
       box-shadow: none; 
   }
   #user-data div{
+    grid-area: 2;
     display: flex;
     width: 100%;
+    height: 100%;
     justify-content: space-around;
   }
   #question-form{
     height: fit-content;
     width: 100%;
     background-color: white;
-    padding: 2% 5%;
-    position: sticky;
-    top: 50px;
-    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 10px auto 10px;
+    grid-template-rows: 50px auto 20px auto 50px;
   }
   #buttons{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+  }
+  #question {
+    grid-area: 4/2;
   }
   .question-field {
     display: flex;
@@ -290,7 +305,7 @@
   }
   .question-field p {
     font-size: larger;
-    width: 70%;
+    width: 85%;
     display: flex;
     justify-content: center;
     margin: 8px;
@@ -312,10 +327,8 @@
     color: whitesmoke;
   }
   #progress-bar{
-    position: relative;
-    top: -20px;
-    width: 100%;
-    height: 5px;
+    grid-area: 3/2;
+    height: fit-content;
     background-color: antiquewhite;
     box-shadow: 0 0 5px black;
   }
