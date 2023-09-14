@@ -126,19 +126,29 @@ function calculateAnswers(answers, questions){
     // SUMMARY TO SEND
     checkedAnswers.summary = `Student gave ${correctAnswers} correct answers, ${wrongAnswers} wrong and didn't answer on ${noAnswers}. The student result is ${result*100}% correct answer.`
     //ADD SEND E-MAIL
-    emailjs.send('service_dckp35n', 'template_4ypd9ca', checkedAnswers)
-    .then(function(response) {
-       console.log('SUCCESS!', response.status, response.text);
-    }, function(error) {
-       console.log('FAILED...', error);
-    });
+    let isSent;
+    function sendEmail (){
+        emailjs.send('service_dckp35n', 'template_4ypd9ca', checkedAnswers)
+            .then(function(response) {
+                isSent = true;
+                alert('Twoje odpowiedzi zostały wysłane. Gratulacje!', response.status, response.text);
+            }, function(error) {
+                alert('Nie można wysłać odpowiedzi. Sprawdź połączenie z internetem i spróbuj ponownie.', error);
+                isSent = false;
+                localStorage("User answers", JSON.stringify(checkedAnswers));
+       
+            });
+    };  
+    sendEmail();
+
+
     const congrats = document.createElement('div');
     congrats.className = "congrats"
-    congrats.innerHTML = "<h2>Congratulations you have finished your test!</h2>"
+    congrats.innerHTML = "<h2>Congratulations you have finished your test!</h2>";
     const button = document.createElement('button');
     button.className = "button";
     button.id = "finish-test";
-    button.textContent = "OK"
+    button.textContent = "OK";
     congrats.appendChild(button);
     container.appendChild(congrats)
     // BUTTON SHOW MY ANSWERS
@@ -146,10 +156,11 @@ function calculateAnswers(answers, questions){
     //showMeAnswer.addEventListener('click', ()=>{showAnswers(showResults)});
     //BUTTON TO DELETE ALL TEST DIV (TO USE IT ON OTHER WEBSITE)
     const close = document.querySelector("#finish-test");
-    close.addEventListener('click', ()=> {closeTest()});
-
-    
-}
+    close.addEventListener('click', ()=> {
+        if(isSent)closeTest()
+        else sendEmail();
+    });
+};
 
 //add form with question
 function nextQuestion(questionNumber, questions){
@@ -200,11 +211,11 @@ function nextQuestion(questionNumber, questions){
         answers.forEach(ans =>{answer = ans.checked ? ans.value : answer = answer});
         userAnswers[questionNumber] = answer;
         question.remove();
-        if(questionNumber<Object.keys(questions).length){
+        if(questionNumber<5/*Object.keys(questions).length*/){
         questionNumber++;
         nextQuestion(questionNumber, questions);
         } else {
-            fetch("https://sweet-kleicha-edf916.netlify.app/b1p-diagnostic-test-a-answer.json")
+            fetch("./public/b1p-diagnostic-test-a-answer.json")
             .then(response => {
                 if(!response.ok){
                     const err = new Error("No answers file accessable!")
