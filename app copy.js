@@ -202,7 +202,7 @@ function nextQuestion(questionNumber, questions){
         question.remove();
         if(questionNumber<Object.keys(questions).length){
         questionNumber++;
-        nextQuestion(questionNumber, questions);
+        loadQuestion(questionNumber);
         } else {
             fetch("https://sweet-kleicha-edf916.netlify.app/b1p-diagnostic-test-a-answer.json")
             .then(response => {
@@ -221,8 +221,8 @@ function nextQuestion(questionNumber, questions){
 //apply questions
 function loadQuestion (questionNumber) {
     testName = "b1p-diagnostic-test";
-    //load questions 
-    fetch("./public/b1p-diagnostic-test-a.json")
+    //download questions 
+    fetch("https://sweet-kleicha-edf916.netlify.app/b1p-diagnostic-test-a.json")
         .then(response => {
             if(!response.ok){
                 const err = new Error("No answers file accessable!")
