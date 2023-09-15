@@ -8,9 +8,11 @@ const closeMark = document.querySelector('#closing-mark');
 const changeColor = document.querySelector('#dark-light');
 let colorLight = true;
 let questionNumber, testName;
+
 function closeTest() {
     container.remove();
-}
+};
+// tochange dark/light mode
 function appearance (){
     const style = document.querySelector('[rel="stylesheet"]');
     if (colorLight){
@@ -23,11 +25,11 @@ function appearance (){
        colorLight = true;
        document.querySelector('#dark-light').innerHTML = "&#x263C";
     };
-}
+};
 //add button close test
 closeMark.onclick = ()=>{closeTest()};
 //add change color
-changeColor.onclick =()=>{appearance()}
+changeColor.onclick =()=>{appearance()};
 /*show results to user - client does'nt want to this
 function showAnswers(results){
     questionForm.innerHTML = "";
@@ -125,41 +127,41 @@ function calculateAnswers(answers, questions){
 
     // SUMMARY TO SEND
     checkedAnswers.summary = `Student gave ${correctAnswers} correct answers, ${wrongAnswers} wrong and didn't answer on ${noAnswers}. The student result is ${result*100}% correct answer.`
+    
     //ADD SEND E-MAIL
-    let isSent;
     function sendEmail (){
+        let isSent;
         emailjs.send('service_dckp35n', 'template_4ypd9ca', checkedAnswers)
-            .then(function(response) {
-                isSent = true;
-                alert('Twoje odpowiedzi zostały wysłane. Gratulacje!', response.status, response.text);
-            }, function(error) {
-                alert('Nie można wysłać odpowiedzi. Sprawdź połączenie z internetem i spróbuj ponownie.', error);
-                isSent = false;
-                localStorage("User answers", JSON.stringify(checkedAnswers));
-       
+        .then(function(response) {
+            isSent = true;
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            alert('Please check if you are connected to internet.', error);
+            isSent = false;
+        })
+        .then(  ()=>{ 
+            container.innerHTML = "";
+            const congrats = document.createElement('div');
+            congrats.className = "congrats"
+            congrats.innerHTML = isSent ? "<h2>Congratulations you have finished your test!</h2>": "<h2>Send my answers again</h2>";
+            const button = document.createElement('button');
+            button.className = "button";
+            button.id = "finish-test";
+            button.textContent = isSent ? "OK": "SEND";
+            congrats.appendChild(button);
+            container.appendChild(congrats)
+            // BUTTON SHOW MY ANSWERS - owner doesn't want this function
+            //const showMeAnswer = document.querySelector('#show-answers');
+            //showMeAnswer.addEventListener('click', ()=>{showAnswers(showResults)});
+            
+            //BUTTON TO DELETE ALL TEST DIV (TO USE IT ON OTHER WEBSITE)
+            const close = document.querySelector("#finish-test");
+            close.addEventListener('click', ()=> {
+                if(isSent)closeTest()
+                else sendEmail();
             });
-    };  
+        })};
     sendEmail();
-
-
-    const congrats = document.createElement('div');
-    congrats.className = "congrats"
-    congrats.innerHTML = "<h2>Congratulations you have finished your test!</h2>";
-    const button = document.createElement('button');
-    button.className = "button";
-    button.id = "finish-test";
-    button.textContent = "OK";
-    congrats.appendChild(button);
-    container.appendChild(congrats)
-    // BUTTON SHOW MY ANSWERS
-    //const showMeAnswer = document.querySelector('#show-answers');
-    //showMeAnswer.addEventListener('click', ()=>{showAnswers(showResults)});
-    //BUTTON TO DELETE ALL TEST DIV (TO USE IT ON OTHER WEBSITE)
-    const close = document.querySelector("#finish-test");
-    close.addEventListener('click', ()=> {
-        if(isSent)closeTest()
-        else sendEmail();
-    });
 };
 
 //add form with question
@@ -211,7 +213,7 @@ function nextQuestion(questionNumber, questions){
         answers.forEach(ans =>{answer = ans.checked ? ans.value : answer = answer});
         userAnswers[questionNumber] = answer;
         question.remove();
-        if(questionNumber<5/*Object.keys(questions).length*/){
+        if(questionNumber<Object.keys(questions).length){
         questionNumber++;
         nextQuestion(questionNumber, questions);
         } else {
@@ -245,7 +247,6 @@ function loadQuestion (questionNumber) {
         .then (json => nextQuestion(questionNumber, json));
 };
 
-
 //submit user ID form
 form.onsubmit = async (e) =>{
     e.preventDefault();
@@ -259,4 +260,4 @@ form.onsubmit = async (e) =>{
     //load test
     questionNumber = 1;
     loadQuestion(questionNumber);
-}
+};
