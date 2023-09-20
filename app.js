@@ -80,19 +80,6 @@ function calculateAnswers(answers, questions) {
     if (answers[i][0] === userAnswers[i]) {
       correctAnswers++;
       const answer = answersValue[answers[i][0]];
-      // switch (userAnswers[i]) {
-      //   case "A":
-      //     answer = questions[i][1];
-      //     break;
-      //   case "B":
-      //     answer = questions[i][2];
-      //     break;
-      //   case "C":
-      //     answer = questions[i][3];
-      //     break;
-      //   case "D":
-      //     answer = questions[i][4];
-      // }
       checkedAnswers.answers.push(
         `On question ${i}: ${questions[i][0]} student gave correct answer:${userAnswers[i]}-${questions[i][answer]}.;`
       );
@@ -106,36 +93,8 @@ function calculateAnswers(answers, questions) {
       answers[i][0] !== userAnswers[i]
     ) {
       wrongAnswers++;
-      // let correctAnswer;
       const correctAnswer = answersValue[answers[i][0]];
-      // switch (answers[i][0]) {
-      //   case "A":
-      //     correctAnswer = questions[i][1];
-      //     break;
-      //   case "B":
-      //     correctAnswer = questions[i][2];
-      //     break;
-      //   case "C":
-      //     correctAnswer = questions[i][3];
-      //     break;
-      //   case "D":
-      //     correctAnswer = questions[i][4];
-      // }
-      // let answer;
       const answer = answersValue[userAnswers[i]];
-      // switch (userAnswers[i]) {
-      //   case "A":
-      //     answer = questions[i][1];
-      //     break;
-      //   case "B":
-      //     answer = questions[i][2];
-      //     break;
-      //   case "C":
-      //     answer = questions[i][3];
-      //     break;
-      //   case "D":
-      //     answer = questions[i][4];
-      // }
       checkedAnswers.answers.push(
         `On question ${i}: ${questions[i][0]} student gave wrong answer:${userAnswers[i]}-${questions[i][answer]}. Correct answer ${answers[i][0]}-${questions[i][correctAnswer]} (${answers[i][1]})`
       );
@@ -149,19 +108,6 @@ function calculateAnswers(answers, questions) {
     } else if (userAnswers[i] === "no answer") {
       noAnswers++;
       const answer = answersValue[answers[i][0]];
-      // switch (answers[i][0]) {
-      //   case "A":
-      //     correctAnswer = questions[i][1];
-      //     break;
-      //   case "B":
-      //     correctAnswer = questions[i][2];
-      //     break;
-      //   case "C":
-      //     correctAnswer = questions[i][3];
-      //     break;
-      //   case "D":
-      //     correctAnswer = questions[i][4];
-      // }
       checkedAnswers.answers.push(
         `On question ${i}: ${questions[i][0]} student didn't give any answer;`
       );
@@ -172,8 +118,7 @@ function calculateAnswers(answers, questions) {
         answers[i][1],
       ];
     }
-  }
-
+  };
   const result =
     Math.round((correctAnswers / Object.keys(answers).length) * 100) / 100;
 
