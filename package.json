@@ -18,5 +18,6 @@
   "homepage": "https://github.com/Demonik993/English_test#readme",
   "dependencies": {
     "@emailjs/browser": "^3.11.0"
-  }
+  },
+  "type": "module"
 }
