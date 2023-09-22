@@ -133,8 +133,8 @@
   }
   .question-field p input {
     appearance: none;
-    width: 1.6em;
-    height: 1.6em;
+    width: 1.7em;
+    height: 1.7em;
     border-radius: 1.3em;
   }
   #ansA:before{content: "A";}
@@ -146,6 +146,10 @@
     position: relative;
     top: 1px;
     left: 4px;
+    color:white;
+  }
+  .question-field p input:hover::before{
+    color: black;
   }
  .question-field p input:hover{
     background-color: white;
